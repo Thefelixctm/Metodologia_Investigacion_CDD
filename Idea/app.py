@@ -13,11 +13,6 @@ with st.sidebar:
 
 # --- LÓGICA DE PÁGINAS ---
 if seleccion == "Idea de Investigación":
-    st.markdown("## Área")
-    st.write("Salud Mental.")
-    
-    st.markdown("## Idea")
-    st.write("Predicción del riesgo de burnout académico...")
     
     st.markdown("## Área")
     st.write("Salud Mental.")
