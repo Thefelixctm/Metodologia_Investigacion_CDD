@@ -6,7 +6,20 @@ st.set_page_config(
     layout="centered"
 )
 
-st.markdown("## Área")
+# --- MENÚ LATERAL ---
+with st.sidebar:
+    st.title("Navegación")
+    seleccion = st.radio("Ir a:", ["Idea de Investigación", "Objetivos ODS"])
+
+# --- LÓGICA DE PÁGINAS ---
+if seleccion == "Idea de Investigación":
+    st.markdown("## Área")
+    st.write("Salud Mental.")
+    
+    st.markdown("## Idea")
+    st.write("Predicción del riesgo de burnout académico...")
+    
+    st.markdown("## Área")
 st.write(
     "Salud Mental."
 )
@@ -117,3 +130,22 @@ st.markdown("""
 
 st.markdown("---")
 st.caption("Aplicación simple en Streamlit para presentar la idea de investigación.")
+
+
+
+
+
+
+
+
+elif seleccion == "Objetivos ODS":
+    st.title("Alineación con los ODS 🌍")
+    st.info("### ODS 3: Salud y Bienestar")
+    st.write("Promueve el bienestar psicológico en universitarios.")
+    
+    st.success("### ODS 4: Educación de Calidad")
+    st.write("Busca reducir la deserción mediante el apoyo basado en datos.")
+    
+    st.warning("### ODS 9: Innovación")
+    st.write("Aplica Machine Learning para resolver problemas sociales.")
+
