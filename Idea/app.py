@@ -50,21 +50,7 @@ if seleccion == "Idea de Investigación":
         "prevención, la intervención temprana y la mejora de la permanencia estudiantil."
     )
 
-    # -----------------------
-    # IMAGEN INICIAL
-    # -----------------------
-    st.markdown("""
-    <div style="display:flex; justify-content:center;">
-        <img src="https://assets.isu.pub/document-structure/240323220837-72cbe6a2ff108e4b792e485cad9848c2/v1/e7f3fb74941cb95df5bb8bbfe2ec105e.jpeg"
-             style="width:100%; max-height:750px; object-fit:cover; border-radius:10px;">
-    </div>
-    """, unsafe_allow_html=True)
-    
-    st.markdown("---")
-    st.caption("Aplicación simple en Streamlit para presentar la idea de investigación.")
-
-elif seleccion == "Palabras clave":
-    st.title("## Palabras clave")
+    st.markdown("## Palabras clave")
     col1, col2, col3 = st.columns(3)
     
     with col1:
@@ -125,6 +111,18 @@ elif seleccion == "Palabras clave":
             language="text"
         )
 
+    # -----------------------
+    # IMAGEN INICIAL
+    # -----------------------
+    st.markdown("""
+    <div style="display:flex; justify-content:center;">
+        <img src="https://assets.isu.pub/document-structure/240323220837-72cbe6a2ff108e4b792e485cad9848c2/v1/e7f3fb74941cb95df5bb8bbfe2ec105e.jpeg"
+             style="width:100%; max-height:750px; object-fit:cover; border-radius:10px;">
+    </div>
+    """, unsafe_allow_html=True)
+    
+    st.markdown("---")
+    st.caption("Aplicación simple en Streamlit para presentar la idea de investigación.")
 
 elif seleccion == "Objetivos ODS":
     st.title("Alineación con los ODS 🌍")
