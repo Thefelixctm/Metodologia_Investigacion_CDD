@@ -6,6 +6,11 @@ st.set_page_config(
     layout="centered"
 )
 
+st.markdown("## Área")
+st.write(
+    "Salud Mental."
+)
+
 st.markdown("## Idea")
 st.write(
     "Predicción del riesgo de burnout académico en estudiantes universitarios "
