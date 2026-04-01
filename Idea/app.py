@@ -6,7 +6,15 @@ st.set_page_config(
     layout="centered"
 )
 
-st.image("burnout.jpeg", use_container_width=True, caption="Imagen inicial")
+# -----------------------
+# IMAGEN INICIAL
+# -----------------------
+st.markdown("""
+<div style="display:flex; justify-content:center;">
+    <img src="https://images.unsplash.com/photo-1507874457470-272b3c8d8ee2"
+         style="width:100%; max-height:750px; object-fit:cover; border-radius:10px;">
+</div>
+""", unsafe_allow_html=True)
 
 st.markdown("## Idea")
 st.write(
