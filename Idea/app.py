@@ -64,7 +64,7 @@ if seleccion == "Idea de Investigación":
     st.caption("Aplicación simple en Streamlit para presentar la idea de investigación.")
 
 elif seleccion == "Palabras clave":
-    st.markdown("## Palabras clave")
+    st.title("## Palabras clave")
     col1, col2, col3 = st.columns(3)
     
     with col1:
