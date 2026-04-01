@@ -6,6 +6,16 @@ st.set_page_config(
     layout="centered"
 )
 
+# -----------------------
+# IMAGEN INICIAL
+# -----------------------
+st.markdown("""
+<div style="display:flex; justify-content:center;">
+    <img src="https://issuu.com/marketingcientifico/docs/blog_4"
+         style="width:100%; max-height:750px; object-fit:cover; border-radius:10px;">
+</div>
+""", unsafe_allow_html=True)
+
 st.title("Idea de Investigación en Ciencia de Datos")
 st.subheader("Área: Salud mental")
 
