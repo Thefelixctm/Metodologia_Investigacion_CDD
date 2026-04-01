@@ -11,7 +11,7 @@ st.set_page_config(
 # -----------------------
 st.markdown("""
 <div style="display:flex; justify-content:center;">
-    <img src="https://images.unsplash.com/photo-1507874457470-272b3c8d8ee2"
+    <img src="https://assets.isu.pub/document-structure/240323220837-72cbe6a2ff108e4b792e485cad9848c2/v1/e7f3fb74941cb95df5bb8bbfe2ec105e.jpeg"
          style="width:100%; max-height:750px; object-fit:cover; border-radius:10px;">
 </div>
 """, unsafe_allow_html=True)
