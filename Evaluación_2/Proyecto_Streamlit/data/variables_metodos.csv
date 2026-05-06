@@ -1,0 +1,7 @@
+dimension,variables_principales,metodos_utilizados,interpretacion
+Burnout y agotamiento,Agotamiento; cinismo; eficacia; cansancio emocional; desenganche,Regresión; correlación; redes; multinivel,Núcleo del fenómeno; el agotamiento aparece como variable central
+Salud mental,Ansiedad; depresión; bienestar; PHQ-9; GAD-7; flourishing,Redes; SEM; clustering; pruebas estadísticas,El burnout forma parte de un sistema amplio de salud mental
+Motivación académica,Pasión armoniosa; pasión obsesiva; engagement; abandono,SEM; correlaciones; multinivel,Pasión armoniosa y engagement operan como factores protectores
+Hábitos diarios,Sueño; horas de estudio; smartphone; ejercicio físico,Redes; diario; regresión; multinivel,Variables modificables útiles para alerta temprana
+Variables sociodemográficas,Sexo; edad; carrera; raza; nivel socioeconómico,Pruebas de medias; clustering justo; bootstrap,"Pueden explicar riesgo, pero requieren tratamiento ético y equidad algorítmica"
+Datos institucionales,Matrícula; retención; notas; carga docente; empleabilidad,Minería de datos; EDA; visualización temporal,Permiten monitorear patrones agregados de estrés y rendimiento
