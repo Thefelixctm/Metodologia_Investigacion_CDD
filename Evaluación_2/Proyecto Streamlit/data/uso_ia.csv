@@ -1,0 +1,6 @@
+etapa,herramienta,uso_especifico,verificacion_humana
+Formulación del problema,Gemini,Exploración inicial del tema y posibles enfoques de investigación.,Se ajustó el tema según la asignatura y la literatura disponible.
+Búsqueda y criterios,ChatGPT,"Apoyo para ordenar palabras clave, operadores booleanos y criterios de inclusión/exclusión.",Las búsquedas y criterios fueron revisados y aplicados manualmente.
+Extracción de datos,ChatGPT,"Apoyo para estructurar la matriz de extracción: autor, año, población, método, variables, resultados y limitaciones.",Los datos fueron contrastados manualmente con los textos completos de los artículos incluidos.
+Síntesis de evidencia,ChatGPT,"Agrupación de estudios por método, tipo de dato, hallazgos y vacíos.",La síntesis fue contrastada con los 6 artículos incluidos.
+Redacción y tablas,ChatGPT,"Apoyo en redacción, coherencia, tablas y material suplementario.",El texto y las tablas fueron revisados y corregidos manualmente.
