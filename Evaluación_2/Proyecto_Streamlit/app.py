@@ -43,7 +43,7 @@ st.markdown(
 
 col1, col2, col3, col4 = st.columns(4)
 with col1: metric_card("Registros identificados", "1.020")
-with col2: metric_card("Registros cribados", "898")
+with col2: metric_card("Registros cribados", "1018")
 with col3: metric_card("Informes evaluados", "122")
 with col4: metric_card("Estudios incluidos", "6")
 
