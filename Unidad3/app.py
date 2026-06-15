@@ -173,18 +173,6 @@ def flow_card(title: str, body: str):
 
 articles = load_articles()
 
-SECTIONS = [
-    "Portada",
-    "Problema",
-    "Estado del arte",
-    "Pregunta e hipótesis",
-    "Objetivos",
-    "Evidencia bibliográfica",
-    "Coherencia del planteamiento",
-    "Uso de IA",
-    "Checklist rúbrica",
-]
-
 with st.sidebar:
     st.title("Unidad 3")
     st.caption("Hipótesis y objetivos de investigación")
