@@ -74,18 +74,7 @@ st.markdown(
 )
 
 logo_rutas = [
-    "imagenes/logo_utem.png",
-    "imagenes/logo_utem.jpg",
-    "imagenes/logo_utem.jpeg",
-    "imagenes/utem_logo.png",
-    "imagenes/utem_logo.jpg",
-    "imagenes/utem_logo.jpeg",
-    "imagenes/logo.png",
-    "imagenes/logo.jpg",
-    "logo_utem.png",
-    "logo_utem.jpg",
-    "utem_logo.png",
-    "utem_logo.jpg"
+    "logo_utem.jpg"
 ]
 
 logo_encontrado = None
