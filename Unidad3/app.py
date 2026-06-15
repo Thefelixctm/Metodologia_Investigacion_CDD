@@ -76,13 +76,15 @@ st.markdown(
 #  Resolver ruta absoluta del logo usando el directorio base del script
 LOGO_PATH = BASE_DIR / "logo_utem.jpg"
 
-# 2. Definir las secciones de navegación de la app
+#  Definir las secciones de navegación de la app
 SECTIONS = [
     "Portada",
     "Problema",
     "Estado del arte",
     "Pregunta e hipótesis",
     "Objetivos",
+    "Evidencia bibliográfica",
+    "Coherencia del planteamiento",
     "Uso de IA",
 ]
 
@@ -336,6 +338,73 @@ elif section == "Objetivos":
     ]
     for i, obj in enumerate(objetivos, start=1):
         card(f"Objetivo específico {i}", obj)
+
+elif section == "Evidencia bibliográfica":
+    st.header("Evidencia bibliográfica")
+    st.write("La tabla resume los seis estudios finales y distingue evidencia directa, complementaria e institucional.")
+
+    tipos = ["Todos"] + sorted(articles["Tipo de evidencia"].unique().tolist())
+    tipo_sel = st.selectbox("Filtrar por tipo de evidencia", tipos)
+    filtered = articles.copy()
+    if tipo_sel != "Todos":
+        filtered = filtered[filtered["Tipo de evidencia"] == tipo_sel]
+
+    st.dataframe(filtered, use_container_width=True, hide_index=True)
+
+    st.subheader("Detalle por estudio")
+    selected = st.selectbox("Selecciona un estudio", articles["Estudio"].tolist())
+    row = articles[articles["Estudio"] == selected].iloc[0]
+
+    col1, col2 = st.columns(2)
+    with col1:
+        card("Método principal", row["Método principal"])
+        card("Población / datos", row["Población/datos"])
+    with col2:
+        card("Aporte", row["Aporte al planteamiento"])
+        card("Limitación o brecha", row["Limitación o brecha"])
+
+    st.subheader("Referencias clave")
+    st.markdown(
+        """
+        - Alluri et al. (2026). *Fairness-aware K-means clustering in digital mental health for higher education students*.
+        - Bojorque et al. (2025). *Stress factors in higher education: A data analysis case*.
+        - Cuevas Caravaca et al. (2025). *Academic burnout and emotional exhaustion among university students*.
+        - Mudło-Głagolska y Larionow (2025). *Passion for studying and its relationships with academic burnout and mental health*.
+        - Rodrigues Matos et al. (2024). *Relações entre burnout estudantil, saúde mental, hábitos de estudo e sono*.
+        - Rodríguez Muñoz y Antino (2021). *El uso del teléfono móvil en clase y su efecto sobre el engagement académico y el agotamiento*.
+        """
+    )
+
+elif section == "Coherencia del planteamiento":
+    st.header("Coherencia del planteamiento")
+    st.write("La investigación se sostiene en una secuencia lógica: problema → brecha → pregunta → hipótesis → objetivos.")
+
+    col1, col2, col3, col4, col5 = st.columns(5)
+    with col1:
+        flow_card("1. Problema", "Burnout académico asociado a agotamiento, desenganche, bajo bienestar y riesgo de abandono.")
+    with col2:
+        flow_card("2. Brecha", "Faltan modelos predictivos supervisados, explicables, reproducibles y validados externamente.")
+    with col3:
+        flow_card("3. Pregunta", "¿La integración de variables permite modelar explicablemente el riesgo?")
+    with col4:
+        flow_card("4. Hipótesis", "La integración multidimensional será más útil que enfoques basados en una sola dimensión.")
+    with col5:
+        flow_card("5. Objetivos", "Identificar variables, caracterizar métodos, comparar brechas y proponer estructura de modelamiento.")
+
+    st.subheader("Relación entre variables")
+    st.markdown(
+        """
+        **Variables psicológicas:** agotamiento, desenganche, bienestar, ansiedad, depresión, engagement.  
+        **Variables académicas:** rendimiento, carga académica, asistencia, avance curricular, reprobaciones.  
+        **Variables conductuales:** sueño, tiempo de estudio, uso de smartphone, actividad física, participación social.  
+        **Salida esperada:** riesgo de burnout académico o perfil de estudiante en riesgo.
+        """
+    )
+
+    st.info(
+        "La coherencia central es que la pregunta y la hipótesis emergen directamente de la brecha: "
+        "la literatura identifica factores, pero no consolida un modelo predictivo explicable e integrado."
+    )
 
 elif section == "Uso de IA":
     st.header("Declaración de uso de inteligencia artificial")
