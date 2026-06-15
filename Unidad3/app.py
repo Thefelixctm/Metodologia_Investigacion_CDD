@@ -107,12 +107,6 @@ with st.sidebar:
             
     st.title("Unidad 3")
     st.caption("Hipótesis y objetivos de investigación")
-    
-    # Indicadores metodológicos del estado del arte
-    st.metric("Estudios finales", "6")
-    st.metric("Bases consultadas", "2")
-    st.metric("Registros iniciales", "1.020")
-    st.caption("WoS + Scopus | Síntesis narrativa y comparativa")
 
 def load_articles() -> pd.DataFrame:
     if DATA_PATH.exists():
