@@ -245,7 +245,7 @@ if section == "Portada":
     with col1:
         card("Área OCDE", "Ciencias de la Educación, con enfoque metodológico en Ciencia de Datos e Inteligencia Artificial.")
     with col2:
-        card("ODS vinculados", "ODS 3: Salud y bienestar · ODS 4: Educación de calidad · ODS 10: Reducción de desigualdades.")
+        card("ODS vinculados", "ODS 3: Salud y bienestar · ODS 4: Educación de calidad · ODS 9: Industria, innovación e infraestructura")
 
     st.subheader("Propósito de la investigación")
     st.write(
