@@ -1,0 +1,9 @@
+ Declaración de uso de IA:
+
+Herramienta; Uso específico.
+Gemini; Exploración inicial de posibles enfoques de investigación.
+ChatGPT; Apoyo en síntesis, redacción académica, organización del planteamiento y construcción de la app Streamlit.
+
+Verificación humana: 
+- El tema final fue ajustado según la asignatura, la evidencia disponible y la revisión sistemática previa.
+- Los contenidos fueron contrastados con el informe previo, los estudios finales seleccionados y la rúbrica de la Unidad 3.
