@@ -73,27 +73,10 @@ st.markdown(
     unsafe_allow_html=True,
 )
 
-# ==========================================
-# CONFIGURACIÓN Y CONTROL DE LA BARRA LATERAL
-# ==========================================
-
-# 1. Resolver ruta absoluta del logo usando el directorio base del script
+#  Resolver ruta absoluta del logo usando el directorio base del script
 LOGO_PATH = BASE_DIR / "logo_utem.jpg"
 
-# 2. Definir las secciones de navegación de la app
-SECTIONS = [
-    "Portada",
-    "Problema",
-    "Estado del arte",
-    "Pregunta e hipótesis",
-    "Objetivos",
-    "Evidencia bibliográfica",
-    "Coherencia del planteamiento",
-    "Uso de IA",
-    "Checklist rúbrica",
-]
-
-# 3. Construir la barra lateral completa en un único bloque unificado
+#  Construir la barra lateral completa en un único bloque unificado
 with st.sidebar:
     # Renderizar el logo de la UTEM si físicamente existe en el repositorio
     if LOGO_PATH.exists():
