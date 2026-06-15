@@ -75,7 +75,18 @@ st.markdown(
 
 def load_articles() -> pd.DataFrame:
     if DATA_PATH.exists():
-        return pd.read_csv(DATA_PATH)
+        try:
+            # Intentamos leer con UTF-8 estándar
+            return pd.read_csv(DATA_PATH, encoding="utf-8")
+        except Exception:
+            try:
+                # Si falla, intentamos con latin-1 (muy común para archivos generados en Excel/Windows)
+                return pd.read_csv(DATA_PATH, encoding="latin-1")
+            except Exception as e:
+                # Si sigue fallando por la estructura interna del CSV, mostramos una alerta
+                st.sidebar.error(f"Error al parsear el CSV: {e}")
+                
+    # Fallback: Datos de respaldo idénticos a tu diseño original
     return pd.DataFrame(
         [
             {
