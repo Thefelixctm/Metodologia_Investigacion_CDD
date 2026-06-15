@@ -162,10 +162,6 @@ with st.sidebar:
     st.caption("Hipótesis y objetivos de investigación")
     section = st.radio("Navegación", SECTIONS, index=0)
     st.divider()
-    st.metric("Estudios finales", "6")
-    st.metric("Bases consultadas", "2")
-    st.metric("Registros iniciales", "1.020")
-    st.caption("WoS + Scopus | Síntesis narrativa y comparativa")
 
 if section == "Portada":
     st.markdown(
