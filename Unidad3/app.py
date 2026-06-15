@@ -104,9 +104,6 @@ with st.sidebar:
             st.image("https://via.placeholder.com/200x100.png?text=UTEM", use_container_width=True)
         except Exception:
             st.markdown("### UTEM")
-            
-    st.title("Unidad 3")
-    st.caption("Hipótesis y objetivos de investigación")
 
 def load_articles() -> pd.DataFrame:
     if DATA_PATH.exists():
