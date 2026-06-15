@@ -105,41 +105,95 @@ with st.sidebar:
             st.markdown("### UTEM")
 
 def load_articles() -> pd.DataFrame:
-    # 1. Definimos las columnas exactas que requiere la aplicación para mantener la integridad
-    columnas_requeridas = ["Estudio", "Año", "Tipo de evidencia", "Población/datos", "Método principal", "Aporte al planteamiento", "Limitación o brecha"]
+    # Definición rigurosa de la estructura de la matriz de evidencia
+    columnas_requeridas = [
+        "Estudio", "Año", "Tipo de evidencia", "Población/datos", 
+        "Método principal", "Aporte al planteamiento", "Limitación o brecha"
+    ]
     
     if DATA_PATH.exists():
-        # Intentamos combinaciones comunes de separadores y encodings
-        for sep in [',', ';']:
-            for encoding in ['utf-8', 'latin-1']:
-                try:
-                    df = pd.read_csv(DATA_PATH, sep=sep, encoding=encoding)
-                    # Validamos que al menos tenga la columna crítica para los filtros
-                    if "Tipo de evidencia" in df.columns:
-                        return df
-                except Exception:
-                    continue
-
-    # 2. Fallback robusto: Si el archivo no existe o está corrupto, construimos el DataFrame
-    # con datos consistentes y todas las columnas requeridas bien estructuradas.
+        try:
+            import csv
+            rows = []
+            # Leemos de forma segura el archivo físico manejando la codificación
+            with open(DATA_PATH, "r", encoding="utf-8", errors="ignore") as f:
+                reader = csv.reader(f)
+                header = next(reader) # Omitimos la cabecera original
+                
+                for row in reader:
+                    if not row:
+                        continue
+                    # Limpieza metodológica: si una fila se desborda por comas internas
+                    if len(row) > 7:
+                        row[6] = ", ".join(row[6:]) # Consolida el texto cortado
+                        row = row[:7]
+                    rows.append(row)
+            
+            df = pd.DataFrame(rows, columns=columnas_requeridas)
+            # Aseguramos la integridad de los tipos de datos
+            df["Año"] = pd.to_numeric(df["Año"], errors="coerce").fillna(2025).astype(int)
+            return df
+            
+        except Exception as e:
+            st.sidebar.warning(f"Aviso: Cargando datos desde almacenamiento integrado. (Motivo: {e})")
+            
+    # =========================================================================
+    # FALLBACK ROBUSTO: Matriz completa de los 6 estudios de la Unidad 3
+    # =========================================================================
     datos_respaldo = [
+        {
+            "Estudio": "Alluri et al.",
+            "Año": 2026,
+            "Tipo de evidencia": "Complementaria computacional",
+            "Población/datos": "Estudiantes de educación superior del Healthy Minds Network",
+            "Método principal": "K-means estándar; K-means justo; bootstrap; pruebas estadísticas; double machine learning",
+            "Aporte al planteamiento": "Aporta segmentación de perfiles de salud mental y equidad algorítmica, útil para pensar modelos explicables y justos.",
+            "Limitación o brecha": "No aborda burnout académico como variable objetivo principal; trabaja salud mental estudiantil amplia.",
+        },
         {
             "Estudio": "Cuevas Caravaca et al.",
             "Año": 2025,
             "Tipo de evidencia": "Directa sobre burnout académico",
-            "Población/datos": "789 universitarios",
-            "Método principal": "Regresión lineal múltiple",
-            "Aporte al planteamiento": "Identifica ejercicio físico como posible factor protector.",
-            "Limitación o brecha": "Diseño transversal; no ML supervisado.",
+            "Población/datos": "789 universitarios de Educación Primaria y Enfermería",
+            "Método principal": "Correlación; t de Student; regresión lineal múltiple",
+            "Aporte al planteamiento": "Mide burnout académico con MBI-SS y cansancio emocional con ECE; identifica ejercicio físico como posible factor protector.",
+            "Limitación o brecha": "Diseño transversal/ex post facto; modelo estadístico explicativo, no machine learning supervisado.",
         },
         {
             "Estudio": "Mudło-Głagolska y Larionow",
             "Año": 2025,
             "Tipo de evidencia": "Directa sobre burnout académico",
-            "Población/datos": "Estudiantes universitarios",
-            "Método principal": "SEM longitudinal",
-            "Aporte al planteamiento": "Muestra que la pasión armoniosa protege frente al agotamiento.",
-            "Limitación o brecha": "No implementa modelo predictivo supervisado.",
+            "Población/datos": "Estudiantes universitarios de primer año en tres muestras",
+            "Método principal": "Correlaciones; SEM longitudinal; análisis de red bayesiano",
+            "Aporte al planteamiento": "Muestra que la pasión armoniosa protege frente a agotamiento y desenganche; aporta visión longitudinal y sistémica.",
+            "Limitación o brecha": "Muestras moderadas; no implementa modelo predictivo supervisado ni validación externa.",
+        },
+        {
+            "Estudio": "Bojorque et al.",
+            "Año": 2025,
+            "Tipo de evidencia": "Complementaria institucional",
+            "Población/datos": "Ocho años de datos institucionales de una universidad ecuatoriana",
+            "Método principal": "Minería de datos; análisis exploratorio; visualización temporal",
+            "Aporte al planteamiento": "Demuestra uso de analítica institucional para detectar anomalías, estrés sistémico y patrones académicos.",
+            "Limitación o brecha": "No mide burnout individual mediante escala psicométrica; evidencia indirecta para el fenómeno central.",
+        },
+        {
+            "Estudio": "Rodrigues Matos et al.",
+            "Año": 2024,
+            "Tipo de evidencia": "Complementaria sobre hábitos y salud mental",
+            "Población/datos": "401 estudiantes en transición hacia educación superior",
+            "Método principal": "Estadística descriptiva; análisis de redes",
+            "Aporte al planteamiento": "Relaciona agotamiento, desengagement, ansiedad, sueño y tiempo de estudio; aporta variables conductuales relevantes.",
+            "Limitación o brecha": "La población no es estrictamente universitaria; diseño transversal.",
+        },
+        {
+            "Estudio": "Rodríguez Muñoz y Antino",
+            "Año": 2021,
+            "Tipo de evidencia": "Directa conductual universitaria",
+            "Población/datos": "45 universitarios y 450 observaciones diarias",
+            "Método principal": "Diseño de diario; análisis multinivel",
+            "Aporte al planteamiento": "El uso del smartphone en clase predice menor engagement y mayor agotamiento diario; aporta variabilidad intraindividual.",
+            "Limitación o brecha": "Muestra pequeña; periodo corto; no desarrolla modelo predictivo generalizable.",
         }
     ]
     
