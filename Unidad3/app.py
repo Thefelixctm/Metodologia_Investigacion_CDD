@@ -76,6 +76,19 @@ st.markdown(
 #  Resolver ruta absoluta del logo usando el directorio base del script
 LOGO_PATH = BASE_DIR / "logo_utem.jpg"
 
+# 2. Definir las secciones de navegación de la app
+SECTIONS = [
+    "Portada",
+    "Problema",
+    "Estado del arte",
+    "Pregunta e hipótesis",
+    "Objetivos",
+    "Evidencia bibliográfica",
+    "Coherencia del planteamiento",
+    "Uso de IA",
+    "Checklist rúbrica",
+]
+
 #  Construir la barra lateral completa en un único bloque unificado
 with st.sidebar:
     # Renderizar el logo de la UTEM si físicamente existe en el repositorio
