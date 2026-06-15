@@ -73,29 +73,54 @@ st.markdown(
     unsafe_allow_html=True,
 )
 
-logo_rutas = [
-    "logo_utem.jpg"
+# ==========================================
+# CONFIGURACIÓN Y CONTROL DE LA BARRA LATERAL
+# ==========================================
+
+# 1. Resolver ruta absoluta del logo usando el directorio base del script
+LOGO_PATH = BASE_DIR / "logo_utem.jpg"
+
+# 2. Definir las secciones de navegación de la app
+SECTIONS = [
+    "Portada",
+    "Problema",
+    "Estado del arte",
+    "Pregunta e hipótesis",
+    "Objetivos",
+    "Evidencia bibliográfica",
+    "Coherencia del planteamiento",
+    "Uso de IA",
+    "Checklist rúbrica",
 ]
 
-logo_encontrado = None
-for ruta in logo_rutas:
-    if os.path.exists(ruta):
-        logo_encontrado = ruta
-        break
-
-# Mostrar logo o placeholder
-if logo_encontrado:
-    try:
-        st.sidebar.image(logo_encontrado, use_container_width=True)
-    except Exception as e:
-        st.sidebar.markdown("### UTEM")
-        st.sidebar.caption("Logo no disponible")
-else:
-    # Intentar mostrar placeholder remoto, si falla mostrar texto
-    try:
-        st.sidebar.image("https://via.placeholder.com/200x100.png?text=UTEM", use_container_width=True)
-    except Exception:
-        st.sidebar.markdown("### UTEM")
+# 3. Construir la barra lateral completa en un único bloque unificado
+with st.sidebar:
+    # Renderizar el logo de la UTEM si físicamente existe en el repositorio
+    if LOGO_PATH.exists():
+        try:
+            st.image(str(LOGO_PATH), use_container_width=True)
+        except Exception as e:
+            st.markdown("### UTEM")
+            st.caption("Error al cargar imagen local")
+    else:
+        # Fallback si el archivo no está en el repositorio de GitHub
+        try:
+            st.image("https://via.placeholder.com/200x100.png?text=UTEM", use_container_width=True)
+        except Exception:
+            st.markdown("### UTEM")
+            
+    st.title("Unidad 3")
+    st.caption("Hipótesis y objetivos de investigación")
+    
+    # Sistema de navegación por radio buttons
+    section = st.radio("Navegación", SECTIONS, index=0)
+    st.divider()
+    
+    # Indicadores metodológicos del estado del arte
+    st.metric("Estudios finales", "6")
+    st.metric("Bases consultadas", "2")
+    st.metric("Registros iniciales", "1.020")
+    st.caption("WoS + Scopus | Síntesis narrativa y comparativa")
 
 def load_articles() -> pd.DataFrame:
     if DATA_PATH.exists():
