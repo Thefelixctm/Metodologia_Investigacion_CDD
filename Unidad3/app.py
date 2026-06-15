@@ -108,10 +108,6 @@ with st.sidebar:
     st.title("Unidad 3")
     st.caption("Hipótesis y objetivos de investigación")
     
-    # Sistema de navegación por radio buttons
-    section = st.radio("Navegación", SECTIONS, index=0)
-    st.divider()
-    
     # Indicadores metodológicos del estado del arte
     st.metric("Estudios finales", "6")
     st.metric("Bases consultadas", "2")
