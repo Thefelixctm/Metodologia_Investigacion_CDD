@@ -72,6 +72,56 @@ st.markdown(
     unsafe_allow_html=True,
 )
 
+logo_rutas = [
+    "imagenes/logo_utem.png",
+    "imagenes/logo_utem.jpg",
+    "imagenes/logo_utem.jpeg",
+    "imagenes/utem_logo.png",
+    "imagenes/utem_logo.jpg",
+    "imagenes/utem_logo.jpeg",
+    "imagenes/logo.png",
+    "imagenes/logo.jpg",
+    "logo_utem.png",
+    "logo_utem.jpg",
+    "utem_logo.png",
+    "utem_logo.jpg"
+]
+
+logo_encontrado = None
+for ruta in logo_rutas:
+    if os.path.exists(ruta):
+        logo_encontrado = ruta
+        break
+
+# Mostrar logo o placeholder
+if logo_encontrado:
+    try:
+        st.sidebar.image(logo_encontrado, use_container_width=True)
+    except Exception as e:
+        st.sidebar.markdown("### UTEM")
+        st.sidebar.caption("Logo no disponible")
+else:
+    # Intentar mostrar placeholder remoto, si falla mostrar texto
+    try:
+        st.sidebar.image("https://via.placeholder.com/200x100.png?text=UTEM", use_container_width=True)
+    except Exception:
+        st.sidebar.markdown("### UTEM")
+    
+    # Opción para subir logo
+    with st.sidebar.expander("Subir Logo UTEM"):
+        uploaded_logo = st.file_uploader("Seleccione el logo", type=['png', 'jpg', 'jpeg'], key="upload_logo")
+        if uploaded_logo is not None:
+            # Crear carpeta si no existe
+            if not os.path.exists("imagenes"):
+                os.makedirs("imagenes")
+            
+            # Guardar logo
+            logo_path = os.path.join("imagenes", "logo_utem.png")
+            with open(logo_path, "wb") as f:
+                f.write(uploaded_logo.getbuffer())
+            st.success("Logo guardado")
+            st.rerun()
+
 
 def load_articles() -> pd.DataFrame:
     if DATA_PATH.exists():
