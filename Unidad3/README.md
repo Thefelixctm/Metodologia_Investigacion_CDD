@@ -30,7 +30,6 @@ La aplicación comunica el planteamiento de investigación de la Unidad 3:
 7. Evidencia bibliográfica.
 8. Coherencia problema-brecha-pregunta-hipótesis-objetivos.
 9. Declaración de uso de IA.
-10. Checklist de cumplimiento de la rúbrica.
 
 ## Declaración de uso de IA
 
