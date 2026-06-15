@@ -107,22 +107,6 @@ else:
         st.sidebar.image("https://via.placeholder.com/200x100.png?text=UTEM", use_container_width=True)
     except Exception:
         st.sidebar.markdown("### UTEM")
-    
-    # Opción para subir logo
-    with st.sidebar.expander("Subir Logo UTEM"):
-        uploaded_logo = st.file_uploader("Seleccione el logo", type=['png', 'jpg', 'jpeg'], key="upload_logo")
-        if uploaded_logo is not None:
-            # Crear carpeta si no existe
-            if not os.path.exists("imagenes"):
-                os.makedirs("imagenes")
-            
-            # Guardar logo
-            logo_path = os.path.join("imagenes", "logo_utem.png")
-            with open(logo_path, "wb") as f:
-                f.write(uploaded_logo.getbuffer())
-            st.success("Logo guardado")
-            st.rerun()
-
 
 def load_articles() -> pd.DataFrame:
     if DATA_PATH.exists():
