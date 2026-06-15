@@ -105,33 +105,45 @@ with st.sidebar:
             st.markdown("### UTEM")
 
 def load_articles() -> pd.DataFrame:
+    # 1. Definimos las columnas exactas que requiere la aplicación para mantener la integridad
+    columnas_requeridas = ["Estudio", "Año", "Tipo de evidencia", "Población/datos", "Método principal", "Aporte al planteamiento", "Limitación o brecha"]
+    
     if DATA_PATH.exists():
-        try:
-            # Intentamos leer con UTF-8 estándar
-            return pd.read_csv(DATA_PATH, sep=";", encoding="utf-8")
-        except Exception:
-            try:
-                # Si falla, intentamos con latin-1 (muy común para archivos generados en Excel/Windows)
-                return pd.read_csv(DATA_PATH, encoding="latin-1")
-            except Exception as e:
-                # Si sigue fallando por la estructura interna del CSV, mostramos una alerta
-                st.sidebar.error(f"Error al parsear el CSV: {e}")
-                
-    # Fallback: Datos de respaldo idénticos a tu diseño original
-    return pd.DataFrame(
-        [
-            {
-                "Estudio": "Cuevas Caravaca et al.",
-                "Año": 2025,
-                "Tipo de evidencia": "Directa sobre burnout académico",
-                "Población/datos": "789 universitarios",
-                "Método principal": "Regresión lineal múltiple",
-                "Aporte al planteamiento": "Identifica ejercicio físico como posible factor protector.",
-                "Limitación o brecha": "Diseño transversal; no ML supervisado.",
-            }
-        ]
-    )
+        # Intentamos combinaciones comunes de separadores y encodings
+        for sep in [',', ';']:
+            for encoding in ['utf-8', 'latin-1']:
+                try:
+                    df = pd.read_csv(DATA_PATH, sep=sep, encoding=encoding)
+                    # Validamos que al menos tenga la columna crítica para los filtros
+                    if "Tipo de evidencia" in df.columns:
+                        return df
+                except Exception:
+                    continue
 
+    # 2. Fallback robusto: Si el archivo no existe o está corrupto, construimos el DataFrame
+    # con datos consistentes y todas las columnas requeridas bien estructuradas.
+    datos_respaldo = [
+        {
+            "Estudio": "Cuevas Caravaca et al.",
+            "Año": 2025,
+            "Tipo de evidencia": "Directa sobre burnout académico",
+            "Población/datos": "789 universitarios",
+            "Método principal": "Regresión lineal múltiple",
+            "Aporte al planteamiento": "Identifica ejercicio físico como posible factor protector.",
+            "Limitación o brecha": "Diseño transversal; no ML supervisado.",
+        },
+        {
+            "Estudio": "Mudło-Głagolska y Larionow",
+            "Año": 2025,
+            "Tipo de evidencia": "Directa sobre burnout académico",
+            "Población/datos": "Estudiantes universitarios",
+            "Método principal": "SEM longitudinal",
+            "Aporte al planteamiento": "Muestra que la pasión armoniosa protege frente al agotamiento.",
+            "Limitación o brecha": "No implementa modelo predictivo supervisado.",
+        }
+    ]
+    
+    return pd.DataFrame(datos_respaldo, columns=columnas_requeridas)
 
 def card(title: str, body: str):
     st.markdown(
