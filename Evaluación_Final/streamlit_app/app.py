@@ -577,34 +577,75 @@ elif section == "Evidencia bibliográfica":
 
 elif section == "Uso de IA":
     st.header("Declaración de uso de inteligencia artificial")
+    
     st.write(
-        "Se utilizó inteligencia artificial como apoyo para reformular el planteamiento, revisar la coherencia metodológica, estructurar el informe en LaTeX y desarrollar la aplicación Streamlit."
+        "Se utilizó inteligencia artificial en distintas etapas del proyecto como apoyo para la formulación del problema, "
+        "revisión de la coherencia metodológica, estructuración del informe en LaTeX y desarrollo de la aplicación Streamlit."
     )
 
-    ia = pd.DataFrame(
-        [
-            {
-                "Herramienta": "ChatGPT",
-                "Modelo": "GPT-5.6 Thinking",
-                "Fecha": "11 de julio de 2026",
-                "Propósito": "Revisión metodológica; redacción; diseño de pipeline; generación y depuración de LaTeX y Streamlit.",
-                "Verificación humana": "Contraste con la rúbrica, el informe previo y las referencias; revisión manual de afirmaciones, código y estructura.",
-            }
-        ]
-    )
-    st.dataframe(ia, width="stretch", hide_index=True)
+    # DataFrame con todos los datos detallados de la imagen
+    ia_data = [
+        {
+            "Herramienta": "Gemini",
+            "Modelo": "Gemini 2.5 Pro",
+            "Fecha": "3 de mayo de 2026",
+            "Propósito": "Apoyo para la formulación del problema de investigación en el contexto de la Entrega de la Unidad 2.",
+            "Verificación humana": "Propuestas contrastadas con la literatura revisada y ajustadas por el estudiante antes de integrarlas al planteamiento del problema."
+        },
+        {
+            "Herramienta": "ChatGPT",
+            "Modelo": "GPT-5.6 Thinking",
+            "Fecha": "11 de julio de 2026",
+            "Propósito": "Revisar la coherencia metodológica, reformular la pregunta, hipótesis y objetivos, organizar el diseño experimental, redactar versión en LaTeX y desarrollar la app Streamlit.",
+            "Verificación humana": "Revisión respecto a la rúbrica, informe previo y referencias. Código compilado y aplicación sometida a revisión de sintaxis y ejecución."
+        },
+        {
+            "Herramienta": "Claude",
+            "Modelo": "Claude Sonnet 5",
+            "Fecha": "11 de julio de 2026",
+            "Propósito": "Revisar la coherencia metodológica del informe, mejorar la redacción/organización en LaTeX, y depurar/perfeccionar la aplicación Streamlit.",
+            "Verificación humana": "Sugerencias revisadas por el estudiante, contrastadas con la rúbrica y referencias, y modificadas antes de incorporarlas a la versión final."
+        }
+    ]
+    
+    df_ia = pd.DataFrame(ia_data)
+    
+    # Renderizado de la tabla completa
+    st.dataframe(df_ia, use_container_width=True, hide_index=True)
 
-    st.subheader("Prompt principal sintetizado")
-    st.code(
-        "Actúa como experto en metodología de investigación en Ciencia de Datos. Reformula el proyecto sobre burnout académico para centrarlo en la contribución predictiva de variables psicológicas, académicas y conductuales. Alinea problema, brecha, pregunta, hipótesis, objetivos y metodología con la rúbrica final. No inventes resultados ni atribuyas causalidad. Genera un informe en LaTeX y una app Streamlit ejecutable.",
-        language=None,
-    )
+    # Sección de Prompts utilizados organizados por pestañas o expansores
+    st.subheader("Prompts principales utilizados")
+    
+    with st.expander("Ver prompt de Gemini (Formulación del problema)"):
+        st.code(
+            '"Actúa como asistente de investigación en Ciencia de Datos. Ayúdame a formular y delimitar el '
+            'problema de investigación sobre burnout académico en estudiantes universitarios, considerando '
+            'su relevancia, el contexto disciplinar y una posible brecha en la literatura."',
+            language=None
+        )
+        
+    with st.expander("Ver prompt de ChatGPT (Metodología y Desarrollo)"):
+        st.code(
+            '"Actúa como experto en metodología de investigación en Ciencia de Datos. Reformula el '
+            'proyecto sobre burnout académico para centrarlo en la contribución predictiva de variables '
+            'psicológicas, académicas y conductuales. Alinea problema, brecha, pregunta, hipótesis, objetivos '
+            'y metodología con la rúbrica final. No inventes resultados ni atribuyas causalidad. Genera un '
+            'informe en LaTeX y una app Streamlit ejecutable."',
+            language=None
+        )
 
-    warning_box(
-        "Antes de entregar, el estudiante debe añadir el modelo y la fecha exactos de cualquier otra herramienta de IA utilizada en etapas previas, si ese contenido se mantiene en la versión final."
-    )
-    st.write(
-        "El estudiante revisó la propuesta, seleccionó las decisiones metodológicas finales y asume responsabilidad académica completa por el contenido entregado."
+    with st.expander("Ver prompt de Claude (Optimización y Depuración)"):
+        st.code(
+            '"Actúa como experto en metodología de investigación en Ciencia de Datos. Revisa el informe y '
+            'la aplicación Streamlit adjuntos, e identifica errores de coherencia, redacción o implementación. '
+            'Propón mejoras concretas sin inventar resultados ni atribuir causalidad, y sin modificar el '
+            'enfoque original del proyecto."',
+            language=None
+        )
+
+    st.info(
+        "**Nota de responsabilidad:** El estudiante revisó críticamente cada una de las propuestas, seleccionó las "
+        "decisiones metodológicas finales y asume la responsabilidad académica completa por el contenido entregado."
     )
 
 st.divider()
