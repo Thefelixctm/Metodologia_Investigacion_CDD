@@ -110,7 +110,7 @@ SECTIONS = [
 
 def read_csv(path: Path, fallback: Iterable[dict] | None = None) -> pd.DataFrame:
     try:
-        return pd.read_csv(path)
+        return pd.read_csv(path, sep=None, engine="python", on_bad_lines="skip")
     except Exception as exc:
         st.warning(f"No fue posible cargar {path.name}: {exc}")
         return pd.DataFrame(list(fallback or []))
@@ -642,11 +642,6 @@ elif section == "Uso de IA":
             'enfoque original del proyecto."',
             language=None
         )
-
-    st.info(
-        "**Nota de responsabilidad:** El estudiante revisó críticamente cada una de las propuestas, seleccionó las "
-        "decisiones metodológicas finales y asume la responsabilidad académica completa por el contenido entregado."
-    )
 
 st.divider()
 st.caption("Entrega 4 · Metodología de la Investigación en Ciencia de Datos · UTEM · Propuesta sin resultados empíricos")
